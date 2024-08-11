@@ -21,7 +21,7 @@ const TodoList: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/todos');
+      const response = await axios.get('https://todo-app-8e04883b5e0b.herokuapp.com/todos');
       setTodos(response.data);
     } catch (error) {
       // console.error('Error fetchiong todos:', error);

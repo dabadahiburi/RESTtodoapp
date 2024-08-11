@@ -19,7 +19,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:3000/todos/${todo.id}`, {
+      await axios.put(`https://todo-app-8e04883b5e0b.herokuapp.com/${todo.id}`, {
         title,
         description,
         completed,
@@ -34,7 +34,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/todos/${todo.id}`);
+      await axios.delete(`https://todo-app-8e04883b5e0b.herokuapp.com/todos/${todo.id}`);
       onTodoUpdated();
     } catch (error) {
       console.error('Error deleting todo:', error);
