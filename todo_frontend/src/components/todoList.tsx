@@ -12,6 +12,7 @@ interface Todo{
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<string>('all');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTodos();
@@ -23,7 +24,8 @@ const TodoList: React.FC = () => {
       const response = await axios.get('http://localhost:3000/todos');
       setTodos(response.data);
     } catch (error) {
-      console.error('Error fetchiong todos:', error);
+      // console.error('Error fetchiong todos:', error);
+      setError('Todoの取得に失敗しました。ページを再度更新してください')
     }
   };
   //TodoItemに記載を移管
@@ -47,6 +49,7 @@ const TodoList: React.FC = () => {
 
   return (
     <div>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <h1>Todo List</h1>
       <TodoFilter filter={filter} setFilter={setFilter} />
       <ul>

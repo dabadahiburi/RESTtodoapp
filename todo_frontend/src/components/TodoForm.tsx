@@ -8,6 +8,7 @@ interface TodoFormProps{
 const TodoForm: React.FC<TodoFormProps> = ({ onTodoCreated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,11 +22,13 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoCreated }) => {
       setDescription('');
       onTodoCreated();
     } catch (error) {
-      console.error('Error creating todo:', error);
+      // console.error('Error creating todo:', error);
+      setError('Todoの作成に失敗しました。もう一度作成してください');
     }
   };
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <div>
         <label htmlFor="title">Title:</label>
         <input

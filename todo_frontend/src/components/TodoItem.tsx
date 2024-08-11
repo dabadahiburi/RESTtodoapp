@@ -15,6 +15,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
   const [completed, setCompleted] = useState(todo.completed);
+  const [error, SetError] = useState<string | null>(null);
 
   const handleSave = async () => {
     try {
@@ -26,7 +27,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
       setIsEditing(false);
       onTodoUpdated();
     } catch (error) {
-      console.error('Error updating todo:', error);
+      // console.error('Error updating todo:', error);
+      SetError('ToDoTaskの更新に失敗しました。再度更新してください')
     }
   };
 
@@ -42,6 +44,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
 
   return (
     <div>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       {isEditing ? (
         <div>
           <input
