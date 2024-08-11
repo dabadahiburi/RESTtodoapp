@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-
+import TodoItem from './TodoItem';
 interface Todo{
   id: number;
   title: string;
@@ -39,8 +39,7 @@ const TodoList: React.FC = () => {
       <ul>
         {todos.map(todo => (
           <li key={todo.id}>
-            {todo.title} - {todo.description} - {todo.completed ? 'Done' : 'Pending'}
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
+            <TodoItem todo={todo} onTodoUpdated={fetchTodos} />
           </li>
         ))}
       </ul>
