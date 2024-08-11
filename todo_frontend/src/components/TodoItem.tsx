@@ -30,6 +30,16 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/todos/${todo.id}`);
+      onTodoUpdated();
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
+
   return (
     <div>
       {isEditing ? (
@@ -53,6 +63,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
             Completed
           </label>
           <button onClick={handleSave}>Save</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       ) : (
         <div>
@@ -60,6 +71,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onTodoUpdated }) => {
           <p>{todo.description}</p>
           <p>{todo.completed ? 'Done' : 'Pending'}</p>
           <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       )}
     </div>
