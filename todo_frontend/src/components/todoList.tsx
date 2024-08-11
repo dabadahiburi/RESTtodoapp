@@ -27,7 +27,7 @@ const TodoList: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`https://localhost:3000/todos/${id}`)
+      await axios.delete(`http://localhost:3000/todos/${id}`)
       fetchTodos();
     } catch (error) {
       console.error('Error deleting todo:', error)
