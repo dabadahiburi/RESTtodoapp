@@ -13,7 +13,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoCreated }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('https://todo-app-8e04883b5e0b.herokuapp.com/todos', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/todos`, {
         title,
         description,
         completed: false,
